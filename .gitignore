@@ -1,0 +1,21 @@
+# 业务数据永不入库
+data/
+*.db
+*.sqlite
+*.sqlite3
+
+# 真禁词表不入库(它本身就是敏感信息清单);仓里只放 tools/deny_list.example.txt
+deny_list.txt
+tools/deny_list.txt
+
+# 记忆 / 上下文里的私有内容(fork 后按需放开)
+contexts/memory/
+contexts/knowledge_inbox/
+
+# 环境与系统杂物
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+logs/
+state.json
