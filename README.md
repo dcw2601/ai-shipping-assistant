@@ -12,13 +12,28 @@
 2. **认知纪律是地基** — `rules/EPISTEMICS.md` 每次会话强制加载:标注事实/推断/猜测、不知道就直说、先给反面、无新证据不让步、数据必核 asof。
 3. **能力沉淀成 skill** — 每个可复用工作流固化成 `.claude/skills/` 一个目录,带触发词、流程、禁手清单、输出契约;做完一件事,下次更快。
 
-## 快速开始(fork 之后)
+## 这套东西适合谁
 
-1. **改身份层**:`rules/SOUL.md`(你的 AI 叫什么、什么性格)、`rules/USER.md`(你是谁、你的行业、你的要求)。全文搜 `{{` 把占位符换成你的值。
-2. **读一遍 `CLAUDE.md`** — 它是根路由器,Claude Code 每次会话自动加载。按你的领域改「硬触发规则」区。
-3. **建你的第一个 skill**:照 `docs/SKILL_AUTHORING.md` 的规范,把你手头最常做的一个工作流写成 skill。
-4. **接数据**:`rules/WORKSPACE.md` 登记你的数据目录;skills 里的 `<your desk rates>` 类占位符填你的真实数字。
-5. **上自动化**(可选):`docs/AUTOMATION.md` 讲 launchd/cron 定时任务 + 夜批 + AI 审核循环的模式。
+**适合**:
+
+- 航运(或任何「靠判断 + 数据 + 合同吃饭」的行业)的从业者,愿意每周花一点时间「带」一个 AI——纠正它、让它记下来。它是越用越像你的系统,不是装好就完事的软件。
+- 手上有自己的数据(船位、成交、历史估算、合同),希望 AI 基于你的数据说话,而不是基于网上的泛泛之谈。
+- 能接受在终端(命令行)里工作。不会写代码没关系,会复制粘贴命令就够。
+
+**不适合**:
+
+- 想要开箱即用、零配置的聊天工具——直接用网页版 Claude 更省事。
+- 不打算维护身份层和记忆的人——不改 `USER.md`、不教它规矩,它只是一个守纪律的通用助手,体现不出这套结构的价值。
+- 需要多人共用一个 AI 身份的团队——这套设计是「一个人 + 一个幕僚」;团队用法需要自己再设计权限和数据隔离。
+- 想让 AI 自动下单、自动对外发信的人——模板刻意把对外动作都设成「先确认」。
+
+## 快速开始
+
+1. **装 Claude Code 并拿到本仓库**:照 [`docs/QUICKSTART.md`](docs/QUICKSTART.md) 第 1–2 节,15 分钟。
+2. **改身份层**:`rules/SOUL.md`(AI 是谁)和 `rules/USER.md`(你是谁、你怎么赚钱)——QUICKSTART 第 4 节逐字段说明了该填什么,附一份填好的虚构示例。30 分钟。
+3. **用一周**:照 QUICKSTART 第 5 节的五个开场句子开始干活,它哪里不对路就纠正它、让它记下来(第 6 节)。
+
+之后再按需:建你自己的 skill(`docs/SKILL_AUTHORING.md`)、上自动化(`docs/AUTOMATION.md`)。**第一次用,从 [`docs/QUICKSTART.md`](docs/QUICKSTART.md) 读起。**
 
 ## 目录地图
 
@@ -33,6 +48,7 @@ rules/
   skills/INDEX.md         ← skill 总索引
 .claude/skills/           ← skill 真源(每个 skill 一个目录)
 docs/
+  QUICKSTART.md           ← 新手上手:安装 → 改身份层 → 第一周怎么用 → 常见坑(从这里开始)
   ARCHITECTURE.md         ← 整体架构与设计决策
   MEMORY_SYSTEM.md        ← 三层记忆系统详解
   SKILL_AUTHORING.md      ← skill 编写规范(触发/流程/禁手/输出契约)
@@ -41,6 +57,9 @@ tools/
   leak_scan.py            ← 发布前防泄漏全文闸(deny-list 命中即挡)
   voyage_engine/          ← 航次估算纯函数引擎(V3.5 公式,dry bulk 示例)
 examples/                 ← 假数据走通的完整示例
+  walkthrough.md                  ← 专家换算值盲测循环
+  walkthrough_pricing_anchor.md   ← 给船报价:先锚价再报数(含错误示范)
+  walkthrough_session_handoff.md  ← 长会话打包成接力文件,新会话续上
 ```
 
 ## 设计原则(从实战里淬出来的)
